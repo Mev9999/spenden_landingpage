@@ -63,11 +63,11 @@
       </header>
 
       <nav class="langbar" role="navigation" aria-label="Sprachauswahl">
-        <button class="flag" data-lang="de" aria-label="Deutsch">🇩🇪<span>DE</span></button>
-        <button class="flag" data-lang="en" aria-label="English">🇬🇧<span>EN</span></button>
-        <button class="flag" data-lang="ar" aria-label="العربية">🇸🇦<span>AR</span></button>
-        <button class="flag" data-lang="ru" aria-label="Русский">🇷🇺<span>RU</span></button>
-        <button class="flag" data-lang="ja" aria-label="日本語">🇯🇵<span>JA</span></button>
+        <button class="flag" type="button" onclick="setLang('de')" aria-label="Deutsch">🇩🇪<span>DE</span></button>
+        <button class="flag" type="button" onclick="setLang('en')" aria-label="English">🇬🇧<span>EN</span></button>
+        <button class="flag" type="button" onclick="setLang('ar')" aria-label="العربية">🇸🇦<span>AR</span></button>
+        <button class="flag" type="button" onclick="setLang('ru')" aria-label="Русский">🇷🇺<span>RU</span></button>
+        <button class="flag" type="button" onclick="setLang('ja')" aria-label="日本語">🇯🇵<span>JA</span></button>
       </nav>
 
       <section class="grid">
@@ -123,13 +123,10 @@
     </main>
   </div>
 
-  <!-- QR Code lib (leichtgewichtig) -->
+  <!-- QR Code lib -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <!-- QR Code lib (leichtgewichtig) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // --- i18n dictionary ---
+  <script>
+    // --- i18n dictionary (global) ---
     const I18N = {
       de:{title:'Unterstütze die Entwicklung',sub:'Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌',quick:'Schnelle Zahlung',quick_help:'Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.',btn_paypal:'Mit PayPal spenden',btn_stripe:'Mit Karte (Stripe)',btn_kofi:'Ko-fi',crypto:'Krypto (optional)',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR wird clientseitig generiert. Gebühren & Netz prüfen.',usage:'Wofür werden Spenden verwendet?',usage_text:'Server-/API-Kosten, Geräte zum Testen, Bugfixes & Feature-Entwicklung. Transparenzbericht folgt in Changelogs/Readme.',contact:'Kontakt:',imprint:'Impressum',privacy:'Datenschutz',copy:'Kopieren',copied:'Kopiert!'},
       en:{title:'Support the development',sub:'If this app/software helps you, you can donate here. Thank you! 🙌',quick:'Quick payment',quick_help:'One click opens the payment provider in a new tab.',btn_paypal:'Donate with PayPal',btn_stripe:'Pay by card (Stripe)',btn_kofi:'Ko-fi',crypto:'Crypto (optional)',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR is generated on your device. Check fees & network.',usage:'What are donations used for?',usage_text:'Server/API costs, testing devices, bug fixes & feature development. Transparency via changelogs/readme.',contact:'Contact:',imprint:'Imprint',privacy:'Privacy',copy:'Copy',copied:'Copied!'},
@@ -149,24 +146,15 @@
         ['t_usage','usage'],['t_usage_text','usage_text'],['t_contact_label','contact'],
         ['t_imprint','imprint'],['t_privacy','privacy']
       ];
-      map.forEach(([id,key]) => {
-        const el = document.getElementById(id);
-        if (el) el.textContent = dict[key];
-      });
-      // Copy-Buttons lokalisieren
+      map.forEach(([id,key]) => { const el = document.getElementById(id); if (el) el.textContent = dict[key]; });
       document.querySelectorAll('button.copy').forEach(btn => { if(!btn.dataset.locked){ btn.textContent = dict.copy; }});
-      // Aktive Flagge markieren
-      document.querySelectorAll('.flag').forEach(b => b.classList.toggle('active', b.dataset.lang===lang));
+      document.querySelectorAll('.flag').forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${lang}'`)));
       localStorage.setItem('donate_lang', lang);
     }
+    // global verfügbar für onclick
+    window.setLang = setLang;
 
-    // Flags binden (type=button, um Form-Side-Effects zu vermeiden)
-    document.querySelectorAll('.flag').forEach(btn => {
-      btn.setAttribute('type','button');
-      btn.addEventListener('click', () => setLang(btn.dataset.lang));
-    });
-
-    // Startsprache (Storage > Browser > de)
+    // Init (Storage > Browser > de)
     setLang(localStorage.getItem('donate_lang') || (navigator.language || 'de').slice(0,2));
 
     // --- Accordion + QR + Copy ---
@@ -203,8 +191,6 @@
         }
       });
     });
-  });
-</script>
-
+  </script>
 </body>
 </html>
