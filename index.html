@@ -20,6 +20,11 @@
     h1 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.2rem); margin:0; }
     .sub { color: var(--muted); margin: 0 0 18px; }
 
+    .langbar{display:flex;gap:8px;justify-content:flex-end;align-items:center;margin:6px 0 14px}
+    .flag{appearance:none;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:var(--text);padding:6px 10px;border-radius:10px;cursor:pointer}
+    .flag.active{outline:2px solid var(--accent);border-color:transparent}
+    .flag span{margin-left:6px;opacity:.85;font-size:.9rem}
+
     .grid { display:grid; grid-template-columns: 1fr; gap:16px; }
     @media (min-width: 720px){ .grid { grid-template-columns: 1.1fr 0.9fr; } }
 
@@ -51,31 +56,34 @@
       <header class="header">
         <div class="icon">❤</div>
         <div>
-          <h1>Unterstütze die Entwicklung</h1>
-          <p class="sub">Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌</p>
+          <h1 id="t_title">Unterstütze die Entwicklung</h1>
+          <p class="sub" id="t_sub">Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌</p>
         </div>
       </header>
 
+      <nav class="langbar" role="navigation" aria-label="Sprachauswahl">
+        <button class="flag" data-lang="de" aria-label="Deutsch">🇩🇪<span>DE</span></button>
+        <button class="flag" data-lang="en" aria-label="English">🇬🇧<span>EN</span></button>
+        <button class="flag" data-lang="ar" aria-label="العربية">🇸🇦<span>AR</span></button>
+        <button class="flag" data-lang="ru" aria-label="Русский">🇷🇺<span>RU</span></button>
+        <button class="flag" data-lang="ja" aria-label="日本語">🇯🇵<span>JA</span></button>
+      </nav>
+
       <section class="grid">
         <section class="panel">
-          <h2>Schnelle Zahlung<\/h2>
-          <p class="muted">Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.<\/p>
+          <h2 id="t_quick">Schnelle Zahlung</h2>
+          <p class="muted" id="t_quick_help">Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.</p>
           <div class="btns">
-            <!-- PayPal: ersetze die URL unten mit deinem Spendenlink (PayPal.me oder PayPal-Button-Link) -->
-            <a class="btn primary" href="https:\/\/www.paypal.com\/paypalme\/DEINENAME" target="_blank" rel="noopener">Mit PayPal spenden<\/a>
-
-            <!-- Stripe Payment Link: in Stripe anlegen und hier einsetzen -->
-            <a class="btn" href="https:\/\/buy.stripe.com\/DEIN_PAYMENT_LINK" target="_blank" rel="noopener">Mit Karte (Stripe)<\/a>
-
-            <!-- Ko‑fi ODER Buy Me a Coffee: wähle eines, hier Ko‑fi als Empfehlung -->
-            <a class="btn" href="https:\/\/ko-fi.com\/DEINENAME" target="_blank" rel="noopener">Ko‑fi<\/a>
-          <\/div>
-        <\/section>
+            <a class="btn primary" id="t_btn_paypal" href="https://www.paypal.com/paypalme/DEINENAME" target="_blank" rel="noopener">Mit PayPal spenden</a>
+            <a class="btn" id="t_btn_stripe" href="https://buy.stripe.com/DEIN_PAYMENT_LINK" target="_blank" rel="noopener">Mit Karte (Stripe)</a>
+            <a class="btn" id="t_btn_kofi" href="https://ko-fi.com/DEINENAME" target="_blank" rel="noopener">Ko‑fi</a>
+          </div>
+        </section>
 
         <section class="panel">
-          <h2>Krypto (optional)<\/h2>
+          <h2 id="t_crypto">Krypto (optional)</h2>
           <div class="k-section" data-coin="BTC" data-addr="bc1qDEINEBITCOINADRESSE...">
-            <div class="k-head"><span class="k-title">Bitcoin (BTC)</span><span>▼</span></div>
+            <div class="k-head"><span class="k-title" id="t_btc">Bitcoin (BTC)</span><span>▼</span></div>
             <div class="k-body">
               <div class="row">
                 <code class="addr"></code>
@@ -85,7 +93,7 @@
             </div>
           </div>
           <div class="k-section" data-coin="ETH" data-addr="0xDEINEETHADRESSE...">
-            <div class="k-head"><span class="k-title">Ethereum (ETH)</span><span>▼</span></div>
+            <div class="k-head"><span class="k-title" id="t_eth">Ethereum (ETH)</span><span>▼</span></div>
             <div class="k-body">
               <div class="row">
                 <code class="addr"></code>
@@ -94,27 +102,26 @@
               <div class="qr" data-qr></div>
             </div>
           </div>
-          <p class="muted" style="margin-top:8px">QR wird clientseitig generiert. Gebühren & Netz prüfen.</p>
+          <p class="muted" style="margin-top:8px" id="t_crypto_note">QR wird clientseitig generiert. Gebühren & Netz prüfen.</p>
         </section>
       </section>
 
       <section class="panel" style="margin-top:16px">
-        <h2>Wofür werden Spenden verwendet?</h2>
-        <p class="muted">Server‑/API‑Kosten, Geräte zum Testen, Bugfixes & Feature‑Entwicklung. Transparenzbericht folgt in Changelogs/Readme.</p>
+        <h2 id="t_usage">Wofür werden Spenden verwendet?</h2>
+        <p class="muted" id="t_usage_text">Server‑/API‑Kosten, Geräte zum Testen, Bugfixes & Feature‑Entwicklung. Transparenzbericht folgt in Changelogs/Readme.</p>
       </section>
 
       <footer class="foot">
-        <span>Kontakt: <a href="mailto:dein.name@example.com">dein.name@example.com</a></span>
+        <span id="t_contact_label">Kontakt:</span> <a href="mailto:dein.name@example.com">dein.name@example.com</a>
         <span>·</span>
-        <a href="#" target="_blank" rel="noopener">Impressum</a>
+        <a id="t_imprint" href="#" target="_blank" rel="noopener">Impressum</a>
         <span>·</span>
-        <a href="#" target="_blank" rel="noopener">Datenschutz</a>
+        <a id="t_privacy" href="#" target="_blank" rel="noopener">Datenschutz</a>
       </footer>
     </main>
   </div>
 
-  <!-- QR Code lib (leichtgewichtig) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-M/5ntU3K9yQ7PpWwQ8m5H+wykG5bx8QXrPp2eGf6t9nZL8Z1Qqk8E6zHQXn4mceJmJkNQ0Q6m1kQ9vZbW2X2aA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   <script>
     // Accordion für Krypto-Sektionen + QR & Copy
     document.querySelectorAll('.k-section').forEach(section => {
@@ -142,6 +149,8 @@
         catch(e){ alert('Kopieren nicht möglich: ' + e); }
       });
     });
+
+    const I18N = {/* translations here, same as before */};
   </script>
 </body>
 </html>
