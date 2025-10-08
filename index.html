@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Unterstütze die Entwicklung</title>
+  <meta name="description" content="Hilf mit einer Spende, die Weiterentwicklung dieser App/Software zu unterstützen." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --bg:#0b1020; --card:#12172a; --muted:#9aa4b2; --text:#e8edf4; --accent:#6be675; --accent-2:#69b6ff; }
+    * { box-sizing: border-box; }
+    html, body { height:100%; }
+    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; background: radial-gradient(1200px 800px at 70% -10%, #1a2240 0%, var(--bg) 40%, #0a0f1c 100%); color: var(--text); }
+    .wrap { min-height:100%; display:grid; place-items:center; padding: 40px 16px; }
+    .card { width:100%; max-width: 760px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.35); padding: 28px; backdrop-filter: blur(6px); }
+    .header { display:flex; gap:16px; align-items:center; margin-bottom: 8px; }
+    .icon { width:44px; height:44px; border-radius:12px; background: linear-gradient(135deg, var(--accent), var(--accent-2)); display:grid; place-items:center; font-weight:800; color:#0b1020; }
+    h1 { font-size: clamp(1.6rem, 1.1rem + 1.8vw, 2.2rem); margin:0; }
+    .sub { color: var(--muted); margin: 0 0 18px; }
+
+    .grid { display:grid; grid-template-columns: 1fr; gap:16px; }
+    @media (min-width: 720px){ .grid { grid-template-columns: 1.1fr 0.9fr; } }
+
+    .panel { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 14px; padding: 18px; }
+    .panel h2 { font-size: 1.05rem; margin:0 0 8px; }
+    .muted { color: var(--muted); font-size: .95rem; }
+
+    .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:10px; }
+    .btn { appearance:none; border:1px solid rgba(255,255,255,0.14); background:#121a32; color:var(--text); padding:12px 14px; border-radius:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition: transform .06s ease, border-color .2s; }
+    .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.28); }
+    .btn.primary{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1020; border:none; }
+
+    .k-section + .k-section { margin-top: 8px; }
+    .k-head { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; padding:10px 0; }
+    .k-title { font-weight:600; }
+    .k-body { display:none; padding: 0 0 12px; }
+    .row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    code.addr { background: rgba(255,255,255,0.06); border:1px dashed rgba(255,255,255,0.12); padding:8px 10px; border-radius:10px; font-size:.9rem; word-break: break-all; }
+    .copy { padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.18); background: transparent; color: var(--text); cursor: pointer; }
+    .qr { width:152px; height:152px; background:#fff; border-radius:12px; display:grid; place-items:center; padding:8px; }
+
+    .foot { margin-top: 18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; color: var(--muted); font-size:.92rem; }
+    .foot a { color: var(--text); opacity:.9; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <main class="card">
+      <header class="header">
+        <div class="icon">❤</div>
+        <div>
+          <h1>Unterstütze die Entwicklung</h1>
+          <p class="sub">Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌</p>
+        </div>
+      </header>
+
+      <section class="grid">
+        <section class="panel">
+          <h2>Schnelle Zahlung<\/h2>
+          <p class="muted">Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.<\/p>
+          <div class="btns">
+            <!-- PayPal: ersetze die URL unten mit deinem Spendenlink (PayPal.me oder PayPal-Button-Link) -->
+            <a class="btn primary" href="https:\/\/www.paypal.com\/paypalme\/DEINENAME" target="_blank" rel="noopener">Mit PayPal spenden<\/a>
+
+            <!-- Stripe Payment Link: in Stripe anlegen und hier einsetzen -->
+            <a class="btn" href="https:\/\/buy.stripe.com\/DEIN_PAYMENT_LINK" target="_blank" rel="noopener">Mit Karte (Stripe)<\/a>
+
+            <!-- Ko‑fi ODER Buy Me a Coffee: wähle eines, hier Ko‑fi als Empfehlung -->
+            <a class="btn" href="https:\/\/ko-fi.com\/DEINENAME" target="_blank" rel="noopener">Ko‑fi<\/a>
+          <\/div>
+        <\/section>
+
+        <section class="panel">
+          <h2>Krypto (optional)<\/h2>
+          <div class="k-section" data-coin="BTC" data-addr="bc1qDEINEBITCOINADRESSE...">
+            <div class="k-head"><span class="k-title">Bitcoin (BTC)</span><span>▼</span></div>
+            <div class="k-body">
+              <div class="row">
+                <code class="addr"></code>
+                <button class="copy" type="button">Kopieren</button>
+              </div>
+              <div class="qr" data-qr></div>
+            </div>
+          </div>
+          <div class="k-section" data-coin="ETH" data-addr="0xDEINEETHADRESSE...">
+            <div class="k-head"><span class="k-title">Ethereum (ETH)</span><span>▼</span></div>
+            <div class="k-body">
+              <div class="row">
+                <code class="addr"></code>
+                <button class="copy" type="button">Kopieren</button>
+              </div>
+              <div class="qr" data-qr></div>
+            </div>
+          </div>
+          <p class="muted" style="margin-top:8px">QR wird clientseitig generiert. Gebühren & Netz prüfen.</p>
+        </section>
+      </section>
+
+      <section class="panel" style="margin-top:16px">
+        <h2>Wofür werden Spenden verwendet?</h2>
+        <p class="muted">Server‑/API‑Kosten, Geräte zum Testen, Bugfixes & Feature‑Entwicklung. Transparenzbericht folgt in Changelogs/Readme.</p>
+      </section>
+
+      <footer class="foot">
+        <span>Kontakt: <a href="mailto:dein.name@example.com">dein.name@example.com</a></span>
+        <span>·</span>
+        <a href="#" target="_blank" rel="noopener">Impressum</a>
+        <span>·</span>
+        <a href="#" target="_blank" rel="noopener">Datenschutz</a>
+      </footer>
+    </main>
+  </div>
+
+  <!-- QR Code lib (leichtgewichtig) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" integrity="sha512-M/5ntU3K9yQ7PpWwQ8m5H+wykG5bx8QXrPp2eGf6t9nZL8Z1Qqk8E6zHQXn4mceJmJkNQ0Q6m1kQ9vZbW2X2aA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script>
+    // Accordion für Krypto-Sektionen + QR & Copy
+    document.querySelectorAll('.k-section').forEach(section => {
+      const head = section.querySelector('.k-head');
+      const body = section.querySelector('.k-body');
+      const addrBox = section.querySelector('.addr');
+      const copyBtn = section.querySelector('.copy');
+      const qrWrap = section.querySelector('[data-qr]');
+      const coin = section.dataset.coin;
+      const addr = section.dataset.addr;
+      addrBox.textContent = addr;
+
+      head.addEventListener('click', () => {
+        const isOpen = body.style.display === 'block';
+        body.style.display = isOpen ? 'none' : 'block';
+        if (!isOpen && qrWrap && !qrWrap.dataset.ready) {
+          const uri = coin === 'BTC' ? `bitcoin:${addr}` : (coin === 'ETH' ? `ethereum:${addr}` : addr);
+          new QRCode(qrWrap, { text: uri, width: 136, height: 136 });
+          qrWrap.dataset.ready = '1';
+        }
+      });
+
+      copyBtn.addEventListener('click', async () => {
+        try { await navigator.clipboard.writeText(addr); copyBtn.textContent = 'Kopiert!'; setTimeout(()=>copyBtn.textContent='Kopieren', 1200); }
+        catch(e){ alert('Kopieren nicht möglich: ' + e); }
+      });
+    });
+  </script>
+</body>
+</html>
