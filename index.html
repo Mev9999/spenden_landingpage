@@ -9,10 +9,19 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root { --bg:#0b1020; --card:#12172a; --muted:#9aa4b2; --text:#e8edf4; --accent:#6be675; --accent-2:#69b6ff; }
+    :root {
+      --bg:#0b1020; --card:#12172a; --muted:#9aa4b2; --text:#e8edf4;
+      --accent:#6be675; --accent-2:#69b6ff;           /* PayPal-ähnlich grün/blau */
+      --kofi-1:#ffd36b; --kofi-2:#ff8f6b;             /* Ko-fi Highlight */
+      --stripe-1:#2b3a7a; --stripe-2:#4461d7;         /* Stripe Farbe */
+    }
     * { box-sizing: border-box; }
     html, body { height:100%; }
-    body { margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'; background: radial-gradient(1200px 800px at 70% -10%, #1a2240 0%, var(--bg) 40%, #0a0f1c 100%); color: var(--text); }
+    body {
+      margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Noto Sans', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+      background: radial-gradient(1200px 800px at 70% -10%, #1a2240 0%, var(--bg) 40%, #0a0f1c 100%);
+      color: var(--text);
+    }
     .wrap { min-height:100%; display:grid; place-items:center; padding: 40px 16px; }
     .card { width:100%; max-width: 760px; background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02)); border: 1px solid rgba(255,255,255,0.08); border-radius: 18px; box-shadow: 0 10px 30px rgba(0,0,0,.35); padding: 28px; backdrop-filter: blur(6px); }
     .header { display:flex; gap:16px; align-items:center; margin-bottom: 8px; }
@@ -37,6 +46,8 @@
     .btn { appearance:none; border:1px solid rgba(255,255,255,0.14); background:#121a32; color:var(--text); padding:12px 14px; border-radius:12px; font-weight:600; text-decoration:none; display:inline-flex; align-items:center; gap:10px; transition: transform .06s ease, border-color .2s; }
     .btn:hover{ transform: translateY(-1px); border-color: rgba(255,255,255,0.28); }
     .btn.primary{ background: linear-gradient(135deg, var(--accent), var(--accent-2)); color:#0b1020; border:none; }
+    .btn.kofi{ background: linear-gradient(135deg, var(--kofi-1), var(--kofi-2)); color:#2b1600; border:none; }
+    .btn.stripe{ background: linear-gradient(135deg, var(--stripe-1), var(--stripe-2)); border:none; color:#eaf0ff; }
 
     .k-section + .k-section { margin-top: 8px; }
     .k-head { display:flex; align-items:center; justify-content:space-between; cursor:pointer; user-select:none; padding:10px 0; }
@@ -46,9 +57,6 @@
     code.addr { background: rgba(255,255,255,0.06); border:1px dashed rgba(255,255,255,0.12); padding:8px 10px; border-radius:10px; font-size:.9rem; word-break: break-all; }
     .copy { padding:8px 10px; border-radius:10px; border:1px solid rgba(255,255,255,0.18); background: transparent; color: var(--text); cursor: pointer; }
     .qr { width:152px; height:152px; background:#fff; border-radius:12px; display:grid; place-items:center; padding:8px; }
-
-    .foot { margin-top: 18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; color: var(--muted); font-size:.92rem; }
-    .foot a { color: var(--text); opacity:.9; }
   </style>
 </head>
 <body>
@@ -75,23 +83,19 @@
           <h2 id="t_quick">Schnelle Zahlung</h2>
           <p class="muted" id="t_quick_help">Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.</p>
           <div class="btns">
-           <!-- Zahlungs-Buttons -->
-<a class="btn primary" id="t_btn_paypal" href="https://www.paypal.me/mev9999" target="_blank" rel="noopener">Mit PayPal spenden</a>
+            <!-- PayPal + Ko-fi prominent -->
+            <a class="btn primary" id="t_btn_paypal" href="https://www.paypal.me/mev9999" target="_blank" rel="noopener">Mit PayPal spenden</a>
+            <a class="btn kofi" id="t_btn_kofi" href="https://ko-fi.com/mev9999" target="_blank" rel="noopener">Ko-fi</a>
 
-<!-- Stripe-Beträge -->
-<a class="btn" href="https://buy.stripe.com/eVq3cvg3W3Uv3WXa9kfjG02" target="_blank" rel="noopener">5 € (Stripe)</a>
-<a class="btn" href="https://buy.stripe.com/4gMeVd5piez9eBBchsfjG00" target="_blank" rel="noopener">10 € (Stripe)</a>
-<a class="btn" href="https://buy.stripe.com/5kQ8wP5pi8aLdxx2GSfjG01" target="_blank" rel="noopener">20 € (Stripe)</a>
-<a class="btn" href="https://buy.stripe.com/14A6oHaJCdv5allbdofjG03" target="_blank" rel="noopener">50 € (Stripe)</a>
-
-<!-- Ko-fi -->
-<a class="btn" id="t_btn_kofi" href="https://ko-fi.com/mev9999" target="_blank" rel="noopener">Ko-fi</a>
-
+            <!-- Stripe-Beträge (5 € entfernt) -->
+            <a class="btn stripe" href="https://buy.stripe.com/4gMeVd5piez9eBBchsfjG00" target="_blank" rel="noopener">10 € (Stripe)</a>
+            <a class="btn stripe" href="https://buy.stripe.com/5kQ8wP5pi8aLdxx2GSfjG01" target="_blank" rel="noopener">20 € (Stripe)</a>
+            <a class="btn stripe" href="https://buy.stripe.com/14A6oHaJCdv5allbdofjG03" target="_blank" rel="noopener">50 € (Stripe)</a>
           </div>
         </section>
 
         <section class="panel">
-          <h2 id="t_crypto">Krypto (optional)</h2>
+          <h2 id="t_crypto">Krypto</h2>
           <div class="k-section" data-coin="BTC" data-addr="3GXX7CHwro77hjTeR8VxgpHb51ZFJrMLBn">
             <div class="k-head"><span class="k-title" id="t_btc">Bitcoin (BTC)</span><span>▼</span></div>
             <div class="k-body">
@@ -118,16 +122,9 @@
 
       <section class="panel" style="margin-top:16px">
         <h2 id="t_usage">Wofür werden Spenden verwendet?</h2>
-        <p class="muted" id="t_usage_text">Server-/API-Kosten, Geräte zum Testen, Bugfixes & Feature-Entwicklung. Transparenzbericht folgt in Changelogs/Readme.</p>
+        <p class="muted" id="t_usage_text">Server-/API-Kosten, Geräte zum Testen, Bugfixes & Feature-Entwicklung.</p>
       </section>
-
-      <footer class="foot">
-        <span id="t_contact_label">Kontakt:</span> <a href="mailto:dein.name@example.com">dein.name@example.com</a>
-        <span>·</span>
-        <a id="t_imprint" href="#" target="_blank" rel="noopener">Impressum</a>
-        <span>·</span>
-        <a id="t_privacy" href="#" target="_blank" rel="noopener">Datenschutz</a>
-      </footer>
+      <!-- Footer mit Kontakt/Impressum/Datenschutz wurde entfernt -->
     </main>
   </div>
 
@@ -136,11 +133,11 @@
   <script>
     // --- i18n dictionary (global) ---
     const I18N = {
-      de:{title:'Unterstütze die Entwicklung',sub:'Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌',quick:'Schnelle Zahlung',quick_help:'Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.',btn_paypal:'Mit PayPal spenden',btn_stripe:'Mit Karte (Stripe)',btn_kofi:'Ko-fi',crypto:'Krypto (optional)',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR wird clientseitig generiert. Gebühren & Netz prüfen.',usage:'Wofür werden Spenden verwendet?',usage_text:'Server-/API-Kosten, Geräte zum Testen, Bugfixes & Feature-Entwicklung. Transparenzbericht folgt in Changelogs/Readme.',contact:'Kontakt:',imprint:'Impressum',privacy:'Datenschutz',copy:'Kopieren',copied:'Kopiert!'},
-      en:{title:'Support the development',sub:'If this app/software helps you, you can donate here. Thank you! 🙌',quick:'Quick payment',quick_help:'One click opens the payment provider in a new tab.',btn_paypal:'Donate with PayPal',btn_stripe:'Pay by card (Stripe)',btn_kofi:'Ko-fi',crypto:'Crypto (optional)',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR is generated on your device. Check fees & network.',usage:'What are donations used for?',usage_text:'Server/API costs, testing devices, bug fixes & feature development. Transparency via changelogs/readme.',contact:'Contact:',imprint:'Imprint',privacy:'Privacy',copy:'Copy',copied:'Copied!'},
-      ar:{title:'دعم التطوير',sub:'إذا كانت هذه التطبيقات/البرمجية مفيدة لك، يمكنك التبرع هنا. شكرًا لك! 🙌',quick:'دفع سريع',quick_help:'نقرة واحدة تفتح بوابة الدفع في تبويب جديد.',btn_paypal:'التبرع عبر باي بال',btn_stripe:'الدفع بالبطاقة (سترايب)',btn_kofi:'كو-في',crypto:'العملات المشفّرة (اختياري)',btc:'بيتكوين (BTC)',eth:'إيثريوم (ETH)',crypto_note:'يتم توليد رمز QR على جهازك. تحقّق من الرسوم والشبكة.',usage:'فيما تُستخدم التبرعات؟',usage_text:'تكاليف الخوادم وواجهات البرمجة، أجهزة الاختبار، إصلاحات العلل وتطوير الميزات. الشفافية عبر سجل التغييرات/الوثائق.',contact:'تواصل:',imprint:'البيانات القانونية',privacy:'الخصوصية',copy:'نسخ',copied:'تم النسخ!'},
-      ru:{title:'Поддержать разработку',sub:'Если приложение/ПО вам помогает, вы можете пожертвовать здесь. Спасибо! 🙌',quick:'Быстрая оплата',quick_help:'Откроется новая вкладка с платежным сервисом.',btn_paypal:'Пожертвовать через PayPal',btn_stripe:'Оплатить картой (Stripe)',btn_kofi:'Ko-fi',crypto:'Криптовалюты (по желанию)',btc:'Биткойн (BTC)',eth:'Эфириум (ETH)',crypto_note:'QR-код генерируется на вашем устройстве. Проверьте комиссии и сеть.',usage:'На что идут пожертвования?',usage_text:'Расходы на серверы/API, тестовые устройства, исправление ошибок и разработку функций. Прозрачность через changelog/readme.',contact:'Контакты:',imprint:'Правовая информация',privacy:'Конфиденциальность',copy:'Копировать',copied:'Скопировано!'},
-      ja:{title:'開発を支援する',sub:'このアプリ／ソフトが役立ったら、ここから寄付できます。ありがとうございます！🙌',quick:'かんたん支払い',quick_help:'クリックで支払いページが新しいタブで開きます。',btn_paypal:'PayPal で寄付',btn_stripe:'カードで支払い（Stripe）',btn_kofi:'Ko-fi',crypto:'暗号資産（任意）',btc:'ビットコイン（BTC）',eth:'イーサリアム（ETH）',crypto_note:'QR は端末上で生成されます。手数料とネットワークを確認してください。',usage:'寄付の使い道',usage_text:'サーバー／API費用、検証用デバイス、バグ修正と機能開発。変更履歴／README で開示します。',contact:'連絡先:',imprint:'インプリント',privacy:'プライバシー',copy:'コピー',copied:'コピーしました！'}
+      de:{title:'Unterstütze die Entwicklung',sub:'Wenn dir die App/Software hilft, kannst du hier freiwillig spenden. Danke! 🙌',quick:'Schnelle Zahlung',quick_help:'Ein Klick öffnet den Zahlungsanbieter in einem neuen Tab.',btn_paypal:'Mit PayPal spenden',btn_stripe:'Mit Karte (Stripe)',btn_kofi:'Ko-fi',crypto:'Krypto',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR wird clientseitig generiert. Gebühren & Netz prüfen.',usage:'Wofür werden Spenden verwendet?',usage_text:'Server-/API-Kosten, Geräte zum Testen, Bugfixes & Feature-Entwicklung.',copy:'Kopieren',copied:'Kopiert!'},
+      en:{title:'Support the development',sub:'If this app/software helps you, you can donate here. Thank you! 🙌',quick:'Quick payment',quick_help:'One click opens the payment provider in a new tab.',btn_paypal:'Donate with PayPal',btn_stripe:'Pay by card (Stripe)',btn_kofi:'Ko-fi',crypto:'Crypto',btc:'Bitcoin (BTC)',eth:'Ethereum (ETH)',crypto_note:'QR is generated on your device. Check fees & network.',usage:'What are donations used for?',usage_text:'Server/API costs, testing devices, bug fixes & feature development.',copy:'Copy',copied:'Copied!'},
+      ar:{title:'دعم التطوير',sub:'إذا كانت هذه التطبيقات/البرمجية مفيدة لك، يمكنك التبرع هنا. شكرًا لك! 🙌',quick:'دفع سريع',quick_help:'نقرة واحدة تفتح بوابة الدفع في تبويب جديد.',btn_paypal:'التبرع عبر باي بال',btn_stripe:'الدفع بالبطاقة (سترايب)',btn_kofi:'كو-في',crypto:'العملات المشفّرة',btc:'بيتكوين (BTC)',eth:'إيثريوم (ETH)',crypto_note:'يتم توليد رمز QR على جهازك. تحقّق من الرسوم والشبكة.',usage:'فيما تُستخدم التبرعات؟',usage_text:'تكاليف الخوادم وواجهات البرمجة، أجهزة الاختبار، إصلاحات العلل وتطوير الميزات.',copy:'نسخ',copied:'تم النسخ!'},
+      ru:{title:'Поддержать разработку',sub:'Если приложение/ПО вам помогает, вы можете пожертвовать здесь. Спасибо! 🙌',quick:'Быстрая оплата',quick_help:'Откроется новая вкладка с платежным сервисом.',btn_paypal:'Пожертвовать через PayPal',btn_stripe:'Оплатить картой (Stripe)',btn_kofi:'Ko-fi',crypto:'Криптовалюты',btc:'Биткойн (BTC)',eth:'Эфириум (ETH)',crypto_note:'QR-код генерируется на вашем устройстве. Проверьте комиссии и сеть.',usage:'На что идут пожертвования?',usage_text:'Расходы на серверы/API, тестовые устройства, исправление ошибок и разработку функций.',copy:'Копировать',copied:'Скопировано!'},
+      ja:{title:'開発を支援する',sub:'このアプリ／ソフトが役立ったら、ここから寄付できます。ありがとうございます！🙌',quick:'かんたん支払い',quick_help:'クリックで支払いページが新しいタブで開きます。',btn_paypal:'PayPal で寄付',btn_stripe:'カードで支払い（Stripe）',btn_kofi:'Ko-fi',crypto:'暗号資産',btc:'ビットコイン（BTC）',eth:'イーサリアム（ETH）',crypto_note:'QR は端末上で生成されます。手数料とネットワークを確認してください。',usage:'寄付の使い道',usage_text:'サーバー／API費用、検証用デバイス、バグ修正と機能開発。',copy:'コピー',copied:'コピーしました！'}
     };
 
     function setLang(lang){
@@ -149,17 +146,15 @@
       document.documentElement.dir = (lang==='ar') ? 'rtl' : 'ltr';
       const map = [
         ['t_title','title'],['t_sub','sub'],['t_quick','quick'],['t_quick_help','quick_help'],
-        ['t_btn_paypal','btn_paypal'],['t_btn_stripe','btn_stripe'],['t_btn_kofi','btn_kofi'],
+        ['t_btn_paypal','btn_paypal'],['t_btn_kofi','btn_kofi'],
         ['t_crypto','crypto'],['t_btc','btc'],['t_eth','eth'],['t_crypto_note','crypto_note'],
-        ['t_usage','usage'],['t_usage_text','usage_text'],['t_contact_label','contact'],
-        ['t_imprint','imprint'],['t_privacy','privacy']
+        ['t_usage','usage'],['t_usage_text','usage_text']
       ];
       map.forEach(([id,key]) => { const el = document.getElementById(id); if (el) el.textContent = dict[key]; });
       document.querySelectorAll('button.copy').forEach(btn => { if(!btn.dataset.locked){ btn.textContent = dict.copy; }});
       document.querySelectorAll('.flag').forEach(b => b.classList.toggle('active', b.getAttribute('onclick')?.includes(`'${lang}'`)));
       localStorage.setItem('donate_lang', lang);
     }
-    // global verfügbar für onclick
     window.setLang = setLang;
 
     // Init (Storage > Browser > de)
